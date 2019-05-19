@@ -5,17 +5,17 @@ const URL = `http://${url}:${port}/${entryPoint}`;
 
 const resolvers = {
 	Query: {
-		allVideos: (_) =>
+		allComments: (_) =>
 			getRequest(URL, ''),
-		videoById: (_, { id }) =>
+		commentById: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'GET'),
 	},
 	Mutation: {
-		createVideo: (_, { video }) =>
-			generalRequest(`${URL}`, 'POST', video),
-		updateVideo: (_, { id, video }) =>
-			generalRequest(`${URL}/${id}`, 'PUT', video),
-		deleteVideo: (_, { id }) =>
+		createComment: (_, { comment }) =>
+			generalRequest(`${URL}`, 'POST', comment),
+		updateComment: (_, { id, comment }) =>
+			generalRequest(`${URL}/${id}`, 'PUT', comment),
+		deleteComment: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'DELETE'),
 	}
 };
