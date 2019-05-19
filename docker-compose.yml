@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  videos-api:
+    build: .
+    environment:
+      PORT: '5001'
+      SHOW_URLS: 'true'
+      VIDEOS_URL: '192.168.99.101'
+      VIDEOS_PORT: '3002'
+      VIDEOS_ENTRY: 'videos'
+    ports:
+      - '5001:5001'
