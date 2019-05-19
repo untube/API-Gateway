@@ -5,6 +5,7 @@ type Video {
     title: String!
     url: String!
     description: String!
+    duration: Float!
 }
 input VideoInput {
     user_id: Int!
