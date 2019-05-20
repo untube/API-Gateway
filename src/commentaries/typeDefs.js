@@ -9,7 +9,7 @@ type Commentary {
     created_at: String!
     updated_at: String!
 }
-input VideoInput {
+input CommentaryInput {
     id_user: Int!
     id_video
     subject: String!
