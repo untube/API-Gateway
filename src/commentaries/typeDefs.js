@@ -22,7 +22,7 @@ export const commentariesQueries = `
     commentaryById(id: Int!): Commentary!
 `;
 
-export const commentaryMutations = `
+export const commentariesMutations = `
     createCommentary(commentary: CommentaryInput!): Commentary!
     deleteCommentary(id: Int!): String
     updateCommentary(id: Int!, commentary: CommentaryInput!): Commentary!
