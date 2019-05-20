@@ -23,23 +23,16 @@ import commentariesResolvers from './commentaries/resolvers';
 const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
-		videosTypeDef
-	],
-	[
-		videosQueries
-	],
-	[
-		videosMutations
-	],
-	[
-		'scalar JSON',
+		videosTypeDef,
 		commentariesTypeDef
 	],
 	[
-		commentariesQueries
+		videosMutations, 
+		commentariesMutations
 	],
 	[
-		commentariesMutations
+		videosQueries,
+		commentariesQueries
 	]
 );
 
