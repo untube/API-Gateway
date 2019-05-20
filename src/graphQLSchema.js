@@ -22,6 +22,13 @@ import {
 	commentsTypeDef,
 }from './comments/typeDefs';
 
+import{
+	recommendationsMutations,
+	recommendationsQueries,
+	userPreferencesTypeDef,
+	videosStatisticsTypeDef,
+}from './recommendations/typeDefs'
+
 import {
 	coursesMutations,
 	coursesQueries,
@@ -31,6 +38,7 @@ import {
 import videosResolvers from './videos/resolvers';
 import categoriesResolvers from './categories/resolvers';
 import commentsResolvers from './comments/resolvers';
+import recommendationsResolvers from './recommendations/resolvers'
 import coursesResolvers from './courses/resolvers';  //Can be changed for any other microservice
 
 
@@ -41,19 +49,23 @@ const mergedTypeDefs = mergeSchemas(
 		videosTypeDef,
 		categoriesTypeDef,
 		commentsTypeDef,
-		coursesTypeDef
+		coursesTypeDef,
+		userPreferencesTypeDef,
+		videosStatisticsTypeDef
 	],
 	[
 		videosQueries,
 		categoriesQueries,
 		commentsQueries,
-		coursesQueries
+		coursesQueries,
+		recommendationsQueries
 	],
 	[
 		videosMutations,
 		categoriesMutations,
 		commentsMutations,
-		coursesMutations
+		coursesMutations,
+		recommendationsMutations
 	]
 );
 
@@ -65,6 +77,7 @@ export default makeExecutableSchema({
 		videosResolvers,
 		categoriesResolvers,
 		commentsResolvers,
-		coursesResolvers
+		coursesResolvers,
+		recommendationsResolvers
 	)
 });
