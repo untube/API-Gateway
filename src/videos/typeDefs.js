@@ -3,16 +3,20 @@ type Video {
     id: String!
     user_id: Int!
     title: String!
-    url: String!
+    destination: String!
     description: String!
-    duration: Float!
+    size: Float!
+    fieldname: String!
+    originalname : String!
+    encoding: String!
+    fieldname: String!
+    mimetype: String!
 }
 input VideoInput {
     user_id: Int!
     category_id: String
     title: String!
-    url: String!
-    description: String
+    destination: String!
     
 }`;
 
@@ -25,26 +29,4 @@ export const videosMutations = `
     createVideo(video: VideoInput!): Video!
     deleteVideo(id: String!): String
     updateVideo(id: String!, video: VideoInput!): Video!
-`;
-
-export const categoriesTypeDef = `
-type Category {
-    id: String!
-    category: String!
-    description: String!
-}
-input CategoryInput {
-    user_id: Int!
-    title: String!
-}`;
-
-export const categoryQueries = `
-    allCategories: [Category]!
-    categoryById(id: String!): Category!
-`;
-
-export const categoriesMutations = `
-    createCategory(category: CategoryInput!): Category!
-    deleteCategory(id: String!): String
-    updateCategory(id: String!, category: CategoryInput!): Category!
 `;
