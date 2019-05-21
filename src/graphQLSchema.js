@@ -16,11 +16,11 @@ import {
 	categoriesTypeDef,
 }from './categories/typeDefs';
 
-import {
-	commentsMutations,
-	commentsQueries,
-	commentsTypeDef,
-}from './comments/typeDefs';
+
+import {commentariesMutations,
+	commentariesQueries,
+	commentariesTypeDef,
+}from './commentaries/typeDefs';
 
 import{
 	recommendationsMutations,
@@ -30,16 +30,18 @@ import{
 }from './recommendations/typeDefs'
 
 import {
-	coursesMutations,
-	coursesQueries,
-	coursesTypeDef,
-}from './courses/typeDefs';
+	videosulMutations,
+	videosulQueries,
+	videosulTypeDef
+} from './videosul/typeDefs';
+
+
 
 import videosResolvers from './videos/resolvers';
 import categoriesResolvers from './categories/resolvers';
-import commentsResolvers from './comments/resolvers';
+import commentariesResolvers from './commentaries/resolvers';
+import videosulResolvers from './videosul/resolvers';
 import recommendationsResolvers from './recommendations/resolvers'
-import coursesResolvers from './courses/resolvers';  //Can be changed for any other microservice
 
 
 // merge the typeDefs
@@ -47,24 +49,24 @@ const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
 		videosTypeDef,
-		categoriesTypeDef,
-		commentsTypeDef,
-		coursesTypeDef,
+		commentariesTypeDef,
+		videosulTypeDef,
+		categoriesTypeDef
 		userPreferencesTypeDef,
 		videosStatisticsTypeDef
 	],
 	[
 		videosQueries,
 		categoriesQueries,
-		commentsQueries,
-		coursesQueries,
+		commentariesQueries,
+		videosulQueries
 		recommendationsQueries
 	],
 	[
 		videosMutations,
-		categoriesMutations,
-		commentsMutations,
-		coursesMutations,
+		commentariesMutations,
+		videosulMutations,
+		categoriesMutations
 		recommendationsMutations
 	]
 );
@@ -75,9 +77,9 @@ export default makeExecutableSchema({
 	resolvers: merge(
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		videosResolvers,
-		categoriesResolvers,
-		commentsResolvers,
-		coursesResolvers,
+		commentariesResolvers,
+		videosulResolvers,
+		categoriesResolvers
 		recommendationsResolvers
 	)
 });
