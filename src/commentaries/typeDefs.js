@@ -12,6 +12,8 @@ type Commentary {
 input CommentaryInput {
     subject: String!
     description: String!
+    id_user: Int!
+    id_video: String!
 }`;
 
 export const commentariesQueries = `
