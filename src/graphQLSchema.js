@@ -7,32 +7,35 @@ import { mergeSchemas } from './utilities';
 import {
 	videosMutations,
 	videosQueries,
-	videosTypeDef
+	videosTypeDef,
 } from './videos/typeDefs';
 
 import {
 	commentariesMutations,
 	commentariesQueries,
-	commentariesTypeDef
-} from './commentaries/typeDefs';
+	commentariesTypeDef,
+}from './commentaries/typeDefs';
+
+
 
 import videosResolvers from './videos/resolvers';
 import commentariesResolvers from './commentaries/resolvers';
+
 
 // merge the typeDefs
 const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
 		videosTypeDef,
-		commentariesTypeDef
-	],
-	[
-		videosMutations, 
-		commentariesMutations
+		commentariesTypeDef,
 	],
 	[
 		videosQueries,
-		commentariesQueries
+		commentariesQueries,
+	],
+	[
+		videosMutations,
+		commentariesMutations,
 	]
 );
 
