@@ -4,6 +4,9 @@ type userPreferences {
     id_category: Int!
     counter: Int!
 }
+type response {
+    ids: [Int]
+}
 input userPreferencesInput {
     id_user: Int!
     id_category: Int!
@@ -25,7 +28,7 @@ input videosStatisticsInput {
 
 
 export const recommendationsQueries = `
-    recommendationsByUser(code: Int!): [Int]
+    recommendationsByUser(code: Int!): response
 `;
 
 export const recommendationsMutations = `
