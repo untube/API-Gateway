@@ -17,5 +17,8 @@ services:
       VIDEOS_URL: '192.168.99.101'
       VIDEOS_PORT: '3001'
       VIDEOS_ENTRY: 'uploadVideos'
+      RECOMMENDATIONS_URL: '192.168.99.103'
+      RECOMMENDATIONS_PORT: '3003'
+      RECOMMENDATIONS_ENTRY: 'recommendations'
     ports:
       - '5001:5001'

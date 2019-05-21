@@ -22,6 +22,13 @@ import {commentariesMutations,
 	commentariesTypeDef,
 }from './commentaries/typeDefs';
 
+import{
+	recommendationsMutations,
+	recommendationsQueries,
+	userPreferencesTypeDef,
+	videosStatisticsTypeDef,
+}from './recommendations/typeDefs'
+
 import {
 	videosulMutations,
 	videosulQueries,
@@ -34,6 +41,7 @@ import videosResolvers from './videos/resolvers';
 import categoriesResolvers from './categories/resolvers';
 import commentariesResolvers from './commentaries/resolvers';
 import videosulResolvers from './videosul/resolvers';
+import recommendationsResolvers from './recommendations/resolvers'
 
 
 // merge the typeDefs
@@ -44,18 +52,22 @@ const mergedTypeDefs = mergeSchemas(
 		commentariesTypeDef,
 		videosulTypeDef,
 		categoriesTypeDef
+		userPreferencesTypeDef,
+		videosStatisticsTypeDef
 	],
 	[
 		videosQueries,
 		categoriesQueries,
 		commentariesQueries,
 		videosulQueries
+		recommendationsQueries
 	],
 	[
 		videosMutations,
 		commentariesMutations,
 		videosulMutations,
 		categoriesMutations
+		recommendationsMutations
 	]
 );
 
@@ -68,5 +80,6 @@ export default makeExecutableSchema({
 		commentariesResolvers,
 		videosulResolvers,
 		categoriesResolvers
+		recommendationsResolvers
 	)
 });
