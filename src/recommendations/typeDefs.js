@@ -20,15 +20,15 @@ type videosStatistics {
 input videosStatisticsInput {
     id_video: Int!
     id_category: Int!
-    calification: Int!
+    calification: Int
 }`;
 
 
 export const recommendationsQueries = `
-    recommendationsByUser(code: Int!): videosStatistics
+    recommendationsByUser(code: Int!): [Int]
 `;
 
 export const recommendationsMutations = `
     feedUserDB(userPreferences: userPreferencesInput!): String
-    feedVideoDB(input: videosStatisticsInput!): videosStatistics
+    feedVideoDB(videosStatistics: videosStatisticsInput!): String
 `;
