@@ -16,10 +16,17 @@ import {
 	commentariesTypeDef,
 }from './commentaries/typeDefs';
 
+import {
+	videosulMutations,
+	videosulQueries,
+	videosulTypeDef
+} from './videosul/typeDefs';
+
 
 
 import videosResolvers from './videos/resolvers';
 import commentariesResolvers from './commentaries/resolvers';
+import videosulResolvers from './videosul/resolvers';
 
 
 // merge the typeDefs
@@ -28,6 +35,7 @@ const mergedTypeDefs = mergeSchemas(
 		'scalar JSON',
 		videosTypeDef,
 		commentariesTypeDef,
+		videosulTypeDef
 	],
 	[
 		videosQueries,
@@ -36,6 +44,7 @@ const mergedTypeDefs = mergeSchemas(
 	[
 		videosMutations,
 		commentariesMutations,
+		videosulMutations
 	]
 );
 
@@ -45,6 +54,6 @@ export default makeExecutableSchema({
 	resolvers: merge(
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		videosResolvers,
-		commentariesResolvers
+		commentariesResolvers,videosulResolvers
 	)
 });
