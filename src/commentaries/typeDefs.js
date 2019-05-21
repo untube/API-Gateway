@@ -10,11 +10,8 @@ type Commentary {
     updated_at: String!
 }
 input CommentaryInput {
-    id_user: Int!
-    id_video
     subject: String!
     description: String!
-    likes: Int!
 }`;
 
 export const commentariesQueries = `
