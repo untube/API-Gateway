@@ -5,7 +5,7 @@ type userPreferences {
     counter: Int!
 }
 type response {
-    ids: [Int]
+    ids: [String]
 }
 input userPreferencesInput {
     id_user: Int!

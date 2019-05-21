@@ -51,7 +51,7 @@ const mergedTypeDefs = mergeSchemas(
 		videosTypeDef,
 		commentariesTypeDef,
 		videosulTypeDef,
-		categoriesTypeDef
+		categoriesTypeDef,
 		userPreferencesTypeDef,
 		videosStatisticsTypeDef
 	],
@@ -59,14 +59,14 @@ const mergedTypeDefs = mergeSchemas(
 		videosQueries,
 		categoriesQueries,
 		commentariesQueries,
-		videosulQueries
+		videosulQueries,
 		recommendationsQueries
 	],
 	[
 		videosMutations,
 		commentariesMutations,
 		videosulMutations,
-		categoriesMutations
+		categoriesMutations,
 		recommendationsMutations
 	]
 );
@@ -79,7 +79,7 @@ export default makeExecutableSchema({
 		videosResolvers,
 		commentariesResolvers,
 		videosulResolvers,
-		categoriesResolvers
+		categoriesResolvers,
 		recommendationsResolvers
 	)
 });
