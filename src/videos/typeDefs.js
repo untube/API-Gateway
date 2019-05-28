@@ -10,7 +10,6 @@ type Video {
     originalname : String!
     encoding: String!
     fieldname: String!
-    mimetype: String!
 }
 input VideoInput {
     user_id: Int!
@@ -23,6 +22,7 @@ input VideoInput {
 export const videosQueries = `
     allVideos: [Video]!
     videoById(id: String!): Video!
+    streamVideo(id: String!): 
 `;
 
 export const videosMutations = `
