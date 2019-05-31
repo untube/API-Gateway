@@ -13,7 +13,7 @@ services:
       CATEGORIES_ENTRY: 'categories'
       COMMENTARIES_ENTRY: feedback/resources/commentaries
       COMMENTARIES_PORT: '3004'
-      COMMENTARIES_URL: 35.231.49.108
+      COMMENTARIES_URL: '35.231.49.108'
       VIDEOS_URL: '192.168.99.101'
       VIDEOS_PORT: '3001'
       VIDEOS_ENTRY: 'uploadVideos'

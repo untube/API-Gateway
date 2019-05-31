@@ -6,9 +6,11 @@ const URL = `http://${url}:${port}/${entryPoint}`;
 const resolvers = {
 	Query: {
 		allCategories: (_) =>
-			getRequest(URL, ''),
+			generalRequest(`${URL}`, 'GET'),
 		categoryById: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'GET'),
+		videosByCategoryId: (_, { id }) =>
+			generalRequest(`${URL}/${id}/videos`, 'GET'),
 	},
 	Mutation: {
 		createCategory: (_, { category }) =>

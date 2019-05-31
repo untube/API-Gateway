@@ -1,3 +1,4 @@
+
 export const categoriesTypeDef = `
 type Category {
     id: String!
@@ -12,6 +13,7 @@ input CategoryInput {
 export const categoriesQueries = `
     allCategories: [Category]!
     categoryById(id: String!): Category!
+    videosByCategoryId(id: String!) : [Video]!
 `;
 
 export const categoriesMutations = `

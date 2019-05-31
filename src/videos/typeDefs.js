@@ -2,6 +2,7 @@ export const videosTypeDef = `
 type Video {
     id: String!
     user_id: Int!
+    category_id: String!
     title: String!
     destination: String!
     description: String!
@@ -22,7 +23,7 @@ input VideoInput {
 export const videosQueries = `
     allVideos: [Video]!
     videoById(id: String!): Video!
-    streamVideo(id: String!): 
+    streamVideo(id: String!): String 
 `;
 
 export const videosMutations = `
