@@ -11,7 +11,9 @@ const resolvers = {
 		videoById: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'GET'),
 		streamVideo: (_,{id}) =>
-			generalRequest(`${WATCH}/${id}`,`GET`)
+			generalRequest(`${WATCH}/${id}`,`GET`),
+		videosByName: (_,{name}) =>
+			generalRequest(`${URL}/name/${name}`,`GET`)
 
 	},
 	Mutation: {

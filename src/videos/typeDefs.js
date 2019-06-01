@@ -17,6 +17,7 @@ input VideoInput {
     category_id: String
     title: String!
     destination: String!
+    description: String!
     
 }`;
 
@@ -24,6 +25,7 @@ export const videosQueries = `
     allVideos: [Video]!
     videoById(id: String!): Video!
     streamVideo(id: String!): String 
+    videosByName(name: String!): [Video]!   
 `;
 
 export const videosMutations = `
