@@ -1,7 +1,7 @@
 import { generalRequest, getRequest } from '../utilities';
 import { url, port, entryPoint } from './server';
 
-const URL = `http://192.168.99.101:3001/uploadVideo`;
+const URL = `http://34.73.94.91:3001/uploadVideo`;
 
 const resolvers = {
 	
