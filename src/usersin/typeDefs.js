@@ -1,4 +1,4 @@
-export const usersTypeDef = `
+export const usersinTypeDef = `
 type User {
     id: Int!
     email: String!
