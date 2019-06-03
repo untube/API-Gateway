@@ -16,7 +16,7 @@ input UserInput {
     
 }`;
 
-export const usersQueries = `
+export const usersinQueries = `
     allUsers: [User]!
     usersById(id: String!): User!
     usersByEmail(email: String!): String! 
@@ -24,6 +24,6 @@ export const usersQueries = `
     usersByNickname(nickname: String!): String!   
 `;
 
-export const usersMutations = `
+export const usersinMutations = `
     loginUser(user: UserInput!): User!
 `;
