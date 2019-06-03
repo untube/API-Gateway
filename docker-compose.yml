@@ -5,10 +5,10 @@ services:
     environment:
       PORT: '5001'
       SHOW_URLS: 'true'
-      VIDEOS2_URL: '192.168.99.101'
+      VIDEOS2_URL: '192.168.99.103'
       VIDEOS2_PORT: '3002'
       VIDEOS2_ENTRY: 'videos'
-      CATEGORIES_URL: '192.168.99.101'
+      CATEGORIES_URL: '192.168.99.103'
       CATEGORIES_PORT: '3002'
       CATEGORIES_ENTRY: 'categories'
       COMMENTARIES_ENTRY: feedback/resources/commentaries
