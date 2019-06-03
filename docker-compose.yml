@@ -1,24 +1,90 @@
-version: '2.1'
+version: '2'
 services:
-  videos-api:
-    build: .
+  untube-api:
+    image: baangaritar/1e-videos-api-gateway
     environment:
-      PORT: '5001'
+      PORT: '5000'
       SHOW_URLS: 'true'
-      VIDEOS2_URL: '192.168.99.103'
-      VIDEOS2_PORT: '3002'
-      VIDEOS2_ENTRY: 'videos'
-      CATEGORIES_URL: '192.168.99.103'
-      CATEGORIES_PORT: '3002'
-      CATEGORIES_ENTRY: 'categories'
-      COMMENTARIES_ENTRY: feedback/resources/commentaries
-      COMMENTARIES_PORT: '3004'
-      COMMENTARIES_URL: '35.231.49.108'
-      VIDEOS_URL: '192.168.99.101'
-      VIDEOS_PORT: '3001'
-      VIDEOS_ENTRY: 'uploadVideos'
-      RECOMMENDATIONS_URL: '192.168.99.103'
-      RECOMMENDATIONS_PORT: '3003'
+      USERS_SIGNUP_ENTRY: 'auth'
+      USERS_SIGNUP_PORT: '3000'
+      USERS_SIGNUP_URL: '34.73.94.91'
+      USERS_SIGNIN_ENTRY: 'auth/sign_in'
+      USERS_SIGNIN_PORT: '3000'
+      USERS_SIGNIN_URL: '34.73.94.91'
+      MANAGER_ENTRY: 'uploadVideos'
+      MANAGER_PORT: '3001'
+      MANAGER_URL: '34.73.94.91'
+      REPRODUCTION_ENTRY: 'videos'
+      REPRODUCTION_PORT: '3002'
+      REPRODUCTION_URL: '34.73.94.91'
       RECOMMENDATIONS_ENTRY: 'recommendations'
+      RECOMMENDATIONS_PORT: '3003'
+      RECOMMENDATIONS_URL: '34.73.94.91'
+      COMMENTARIES_ENTRY: 'feedback/resources/commentaries'
+      COMMENTARIES_PORT: '3004'
+      COMMENTARIES_URL: '34.73.94.91'
     ports:
-      - '5001:5001'
+    - 5000:5000
+  users-ms:
+    image: baangaritar/1e-videos-user-ms
+    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails s -p 4000 -b '0.0.0.0'"
+    ports:
+      - 3000:4000
+    depends_on:
+      - 'users-db'
+  video-manager-ms:
+    image: baangaritar/1e-videos-manager-ms
+    ports:
+    - 3001:3001
+    depends_on:
+      - 'mongodb'
+  video-reproduction-ms:
+    image: baangaritar/1e-videos-reproduction-ms
+    ports:
+    - 3002:3002
+    depends_on:
+      - 'mongodb'
+  recommendations-ms:
+    image: baangaritar/1e-videos-recommendations-ms
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:3003"
+    ports:
+      - "3003:3003"
+    depends_on:
+      - recommendations-db
+  feedback-ms:
+    image: baangaritar/1e-videos-feedback-ms
+    ports:
+    - 3004:3004
+    depends_on:
+      - 'feedback-db'
+  mongodb:
+    image: mongo:latest
+    ports:
+    - 27017:27017
+  feedback-db:
+    image: mysql:5.7
+    ports:
+    - 3308:3308
+    environment:
+      MYSQL_DATABASE: feedback-db
+      MYSQL_PASSWORD: '123'
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_USER: sa
+      MYSQL_HOST: feedback-db
+  users-db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: arquisoft
+      MYSQL_PASSWORD: 123
+      MYSQL_DATABASE: auth
+      MYSQL_HOST: users-db
+  recommendations-db:
+    image: postgres
+  web-client:
+    image: baangaritar/1e-videos-web-client 
+    ports: 
+    - 4200:4200
+

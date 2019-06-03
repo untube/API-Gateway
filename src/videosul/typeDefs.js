@@ -1,6 +1,10 @@
 export const videosulTypeDef = `
 type videoul {
     user_id: Int!,
+    category_id:String!,
+    title:String!,
+    description:String!,
+    views:Int,
     fieldname: String!,
     originalname:String!,
     encoding: String!,
@@ -10,8 +14,13 @@ type videoul {
     size: Int!,
     data:String!
 }
+
 input videoulInput {
     user_id: Int!,
+    category_id:String!,
+    title:String!,
+    description:String!,
+    views:Int,
     fieldname: String!,
     originalname:String!,
     encoding: String!,
