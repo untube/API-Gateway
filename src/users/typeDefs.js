@@ -14,7 +14,7 @@ type User {
 
 type UserResponse {
     message: String!
-    content: [User]!
+    content: User!
 }
 
 type LoginResponse {
@@ -28,8 +28,6 @@ type LoginResponse {
 
 input UserInput {
     email: String!
-    name: String!
-    nickname: String!
     password: String!
     password_confirmation: String!
     
@@ -41,16 +39,16 @@ input UserLogin {
 }`;
 
 export const usersQueries = `
-    userById(id: String!): UserResponse
-    userByEmail(email: String!): UserResponse 
-    userByName(name: String!): UserResponse
-    userByNickname(nickname: String!): UserResponse   
+    userById(id: String!): UserResponse!
+    userByEmail(email: String!): UserResponse!
+    userByName(name: String!): UserResponse!
+    userByNickname(nickname: String!): UserResponse!
 `;
 
 export const usersMutations = `
-    createUser(user: UserInput!): UserResponse
-    deleteUser(id: Int!): UserResponse
-    updateUser(id: Int!, user: UserInput!): UserResponse
-    loginUser( user: UserLogin): LoginResponse
+    createUser(user: UserInput!): UserResponse!
+    deleteUser(id: Int!): UserResponse!
+    updateUser(id: Int!, user: UserInput!): UserResponse!
+    loginUser( user: UserLogin): LoginResponse!
 
 `;
