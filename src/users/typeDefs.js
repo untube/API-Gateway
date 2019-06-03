@@ -31,4 +31,6 @@ export const usersMutations = `
     createUser(user: UserInput!): User!
     deleteUser(id: String!): String
     updateUser(id: String!, user: UserInput!): User!
+    loginUser(email: String!, password: String!): User!
+
 `;
