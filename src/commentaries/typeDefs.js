@@ -18,7 +18,7 @@ input CommentaryInput {
 
 export const commentariesQueries = `
     commentaryById(id: Int!): Commentary!
-    commentariesByVideo(id: String!): [Commentary]!
+    commentariesByVideo(id_video: String!): [Commentary]!
 `;
 
 export const commentariesMutations = `
