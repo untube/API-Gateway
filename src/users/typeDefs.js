@@ -13,7 +13,7 @@ type User {
 }
 
 type UserResponse {
-    message: String!
+    message: String
     content: User!
 }
 
