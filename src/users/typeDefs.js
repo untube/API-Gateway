@@ -14,7 +14,7 @@ type User {
 
 type UserResponse {
     status: String
-    content: User
+    data: User
 }
 
 type LoginResponse {
