@@ -18,12 +18,7 @@ type UserResponse {
 }
 
 type LoginResponse {
-    id: Int!
-    provider: String!
-    email: String!
-    name: String!
-    nickname: String!
-
+    data: User
 }
 
 input UserInput {
