@@ -4,7 +4,6 @@ import { url, port, entryPoint} from './server';
 
 const URL = `http://${url}:${port}/${entryPoint}`;
 
-
 const resolvers = {
 	Query: {
 		userById: (_, { id }) =>
@@ -24,7 +23,7 @@ const resolvers = {
 			generalRequest(`${URL}/${id}`, 'PUT', user),
 		deleteUser: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'DELETE'),
-		loginUser: (_, { email, password }) =>
+		loginUser: (_, { user }) =>
 			generalRequest(`${URL}/sign_in`, 'POST', user),
 	}
 };
