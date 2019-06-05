@@ -13,8 +13,8 @@ type User {
 }
 
 type UserResponse {
-    message: String
-    content: User!
+    status: String
+    content: User
 }
 
 type LoginResponse {
@@ -27,6 +27,8 @@ type LoginResponse {
 }
 
 input UserInput {
+    name: String
+    nickname: String
     email: String!
     password: String!
     password_confirmation: String!
