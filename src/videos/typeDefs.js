@@ -25,7 +25,8 @@ export const videosQueries = `
     allVideos: [Video]!
     videoById(id: String!): Video!
     streamVideo(id: String!): String 
-    videosByName(name: String!): [Video]!   
+    videosByName(name: String!): [Video]!
+    videosByUser(id: Int!): [Video] !   
 `;
 
 export const videosMutations = `

@@ -5,12 +5,9 @@ services:
     environment:
       PORT: '5000'
       SHOW_URLS: 'true'
-      USERS_SIGNUP_ENTRY: 'auth'
-      USERS_SIGNUP_PORT: '3000'
-      USERS_SIGNUP_URL: '34.73.94.91'
-      USERS_SIGNIN_ENTRY: 'auth/sign_in'
-      USERS_SIGNIN_PORT: '3000'
-      USERS_SIGNIN_URL: '34.73.94.91'
+      USERS_ENTRY: 'auth'
+      USERS_PORT: '3000'
+      USERS_URL: '34.73.94.91'
       MANAGER_ENTRY: 'uploadVideos'
       MANAGER_PORT: '3001'
       MANAGER_URL: '34.73.94.91'
@@ -25,6 +22,8 @@ services:
       COMMENTARIES_URL: '34.73.94.91'
     ports:
     - 5000:5000
+    labels:
+      io.rancher.container.pull_image: always
   users-ms:
     image: baangaritar/1e-videos-user-ms
     command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails s -p 4000 -b '0.0.0.0'"
@@ -32,18 +31,24 @@ services:
       - 3000:4000
     depends_on:
       - 'users-db'
+    labels:
+      io.rancher.container.pull_image: always
   video-manager-ms:
     image: baangaritar/1e-videos-manager-ms
     ports:
     - 3001:3001
     depends_on:
       - 'mongodb'
+    labels:
+      io.rancher.container.pull_image: always
   video-reproduction-ms:
     image: baangaritar/1e-videos-reproduction-ms
     ports:
     - 3002:3002
     depends_on:
       - 'mongodb'
+    labels:
+      io.rancher.container.pull_image: always
   recommendations-ms:
     image: baangaritar/1e-videos-recommendations-ms
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:3003"
@@ -51,12 +56,16 @@ services:
       - "3003:3003"
     depends_on:
       - recommendations-db
+    labels:
+      io.rancher.container.pull_image: always
   feedback-ms:
     image: baangaritar/1e-videos-feedback-ms
     ports:
     - 3004:3004
     depends_on:
       - 'feedback-db'
+    labels:
+      io.rancher.container.pull_image: always
   mongodb:
     image: mongo:latest
     ports:
@@ -87,4 +96,7 @@ services:
     image: baangaritar/1e-videos-web-client 
     ports: 
     - 4200:4200
-
+    volumes:
+      - '/app/node_modules'
+    labels:
+io.rancher.container.pull_image: always

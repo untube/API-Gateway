@@ -13,7 +13,9 @@ const resolvers = {
 		streamVideo: (_,{id}) =>
 			generalRequest(`${WATCH}/${id}`,`GET`),
 		videosByName: (_,{name}) =>
-			generalRequest(`${URL}/name/${name}`,`GET`)
+			generalRequest(`${URL}/name/${name}`,`GET`),
+		videosByUser: (_,{id}) =>
+			generalRequest(`${URL}/user/${id}`,`GET`)
 
 	},
 	Mutation: {
