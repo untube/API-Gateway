@@ -12,25 +12,40 @@ type User {
     updated_at: String!
 }
 
+type UserResponse {
+    status: String
+    data: User
+}
+
+type LoginResponse {
+    data: User
+}
+
 input UserInput {
+    name: String
+    nickname: String
     email: String!
     password: String!
     password_confirmation: String!
     
+}
+
+input UserLogin {
+    email: String!
+    password: String!
 }`;
 
 export const usersQueries = `
-    allUsers: [User]!
-    usersById(id: String!): User!
-    usersByEmail(email: String!): String! 
-    usersByName(name: String!): String! 
-    usersByNickname(nickname: String!): String!   
+    userById(id: String!): UserResponse!
+    userByEmail(email: String!): UserResponse!
+    userByName(name: String!): UserResponse!
+    userByNickname(nickname: String!): UserResponse!
 `;
 
 export const usersMutations = `
-    createUser(user: UserInput!): User!
-    deleteUser(id: String!): String
-    updateUser(id: String!, user: UserInput!): User!
-    loginUser(email: String!, password: String!): User!
+    createUser(user: UserInput!): UserResponse!
+    deleteUser(id: Int!): UserResponse!
+    updateUser(id: Int!, user: UserInput!): UserResponse!
+    loginUser( user: UserLogin): LoginResponse!
 
 `;

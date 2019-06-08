@@ -5,10 +5,11 @@ const URL = `http://${url}:${port}/${entryPoint}`;
 
 const resolvers = {
 	Query: {
-		allCommentaries: (_) =>
-			getRequest(URL, ''),
+		
 		commentaryById: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'GET'),
+		commentariesByVideo: (_, {id_video}) =>
+			generalRequest(`${URL}/${id_video}`, 'GET'),
 	},
 	Mutation: {
 		createCommentary: (_, { commentary }) =>

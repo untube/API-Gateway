@@ -99,4 +99,5 @@ services:
     volumes:
       - '/app/node_modules'
     labels:
-io.rancher.container.pull_image: always
+      io.rancher.container.pull_image: always
+

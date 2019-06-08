@@ -1,19 +1,18 @@
 import { generalRequest, getRequest } from '../utilities';
 import { url, port, entryPoint} from './server';
 
+
 const URL = `http://${url}:${port}/${entryPoint}`;
 
 const resolvers = {
 	Query: {
-		allUsers: (_) =>
-			generalRequest(`${URL}`, 'GET'),
-		usersById: (_, { id }) =>
+		userById: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'GET'),
-		usersByEmail: (_, { email }) =>
+		userByEmail: (_, { email }) =>
 			generalRequest(`${URL}/email/${email}`, 'GET'),
-		usersByName: (_, { name }) =>
+		userByName: (_, { name }) =>
 			generalRequest(`${URL}/name/${name}`, 'GET'),
-		usersByNickname: (_, { nickname }) =>
+		userByNickname: (_, { nickname }) =>
 			generalRequest(`${URL}/nickname/${nickname}`, 'GET')
 
 	},
@@ -24,8 +23,8 @@ const resolvers = {
 			generalRequest(`${URL}/${id}`, 'PUT', user),
 		deleteUser: (_, { id }) =>
 			generalRequest(`${URL}/${id}`, 'DELETE'),
-		loginUser: (_, { email, password }) =>
-			generalRequest(`${URL}`, 'POST', user),
+		loginUser: (_, { user }) =>
+			generalRequest(`${URL}/sign_in`, 'POST', user),
 	}
 };
 
