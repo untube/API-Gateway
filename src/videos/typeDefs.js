@@ -7,7 +7,7 @@ type Video {
     description: String!
     fieldname: String!
     originalname : String!
-    fieldname: String!
+    filename: String!
     image: String!
 }
 input VideoInput {
