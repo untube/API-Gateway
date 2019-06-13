@@ -4,19 +4,16 @@ type Video {
     user_id: Int!
     category_id: String!
     title: String!
-    destination: String!
     description: String!
-    size: Float!
     fieldname: String!
     originalname : String!
-    encoding: String!
     fieldname: String!
+    image: String!
 }
 input VideoInput {
     user_id: Int!
     category_id: String
     title: String!
-    destination: String!
     description: String!
     
 }`;
