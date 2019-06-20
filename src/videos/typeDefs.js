@@ -3,10 +3,11 @@ type Video {
     id: String!
     user_id: Int!
     category_id: String!
+    video_id: String!
     title: String!
     description: String!
-    fieldname: String!
     originalname : String!
+    views: Int!
     filename: String!
     image: String!
 }
