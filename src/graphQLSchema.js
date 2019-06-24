@@ -44,7 +44,6 @@ import {
 
 import {
     authMutations,
-    authQueries,
     authTypeDef
 } from './authentication/typeDefs';
 
@@ -77,8 +76,7 @@ const mergedTypeDefs = mergeSchemas(
         commentariesQueries,
         videosulQueries,
         recommendationsQueries,
-        sessionQueries,
-        authQueries
+        sessionQueries
     ], [
         videosMutations,
         commentariesMutations,
