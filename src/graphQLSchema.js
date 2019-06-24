@@ -38,7 +38,7 @@ import {
 
 import {
     sessionsMutations,
-    sessionsQueries,
+    sessionQueries,
     sessionsTypeDef,
 } from './users/typeDefs';
 
@@ -77,7 +77,7 @@ const mergedTypeDefs = mergeSchemas(
         commentariesQueries,
         videosulQueries,
         recommendationsQueries,
-        sessionsQueries,
+        sessionQueries,
         authQueries
     ], [
         videosMutations,
