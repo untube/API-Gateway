@@ -37,9 +37,9 @@ import {
 } from './videosul/typeDefs';
 
 import {
-    usersMutations,
-    usersQueries,
-    usersTypeDef,
+    sessionsMutations,
+    sessionsQueries,
+    sessionsTypeDef,
 } from './users/typeDefs';
 
 import {
@@ -69,7 +69,7 @@ const mergedTypeDefs = mergeSchemas(
         categoriesTypeDef,
         userPreferencesTypeDef,
         videosStatisticsTypeDef,
-        usersTypeDef,
+        sessionsTypeDef,
         authTypeDef
     ], [
         videosQueries,
@@ -77,7 +77,7 @@ const mergedTypeDefs = mergeSchemas(
         commentariesQueries,
         videosulQueries,
         recommendationsQueries,
-        usersQueries,
+        sessionsQueries,
         authQueries
     ], [
         videosMutations,
@@ -85,7 +85,7 @@ const mergedTypeDefs = mergeSchemas(
         videosulMutations,
         categoriesMutations,
         recommendationsMutations,
-        usersMutations,
+        sessionsMutations,
         authMutations
     ]
 );
