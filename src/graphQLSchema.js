@@ -39,7 +39,7 @@ import {
 import {
     sessionsMutations,
     sessionQueries,
-    sessionsTypeDef,
+    sessionsTypeDef
 } from './users/typeDefs';
 
 import {
