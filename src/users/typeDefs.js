@@ -1,51 +1,37 @@
-export const usersTypeDef = `
+export const sessionsTypeDef = `
 type User {
     id: Int!
+    email: String!
     provider: String!
-    uid: String!
-    allow_password_change: Boolean!
     name: String!
     nickname: String!
-    image: String!
-    email: String!
-    created_at: String!
-    updated_at: String!
+    image: String
 }
-
-type UserResponse {
-    status: String
-    data: User
-}
-
-type LoginResponse {
-    data: User
-}
-
-input UserInput {
-    name: String
-    nickname: String
+input SessionInput {
     email: String!
     password: String!
-    password_confirmation: String!
-    
 }
-
-input UserLogin {
+input Headers {
+    token: String!
+    client: String!
+    uid: String!
+}
+type sessionData {
+    id: Int!
     email: String!
-    password: String!
-}`;
-
-export const usersQueries = `
-    userById(id: String!): UserResponse!
-    userByEmail(email: String!): UserResponse!
-    userByName(name: String!): UserResponse!
-    userByNickname(nickname: String!): UserResponse!
+    name: String!
+    nickname: String!
+    image: String
+    token: String!
+    type: String!
+    client: String!
+}
 `;
 
-export const usersMutations = `
-    createUser(user: UserInput!): UserResponse!
-    deleteUser(id: Int!): UserResponse!
-    updateUser(id: Int!, user: UserInput!): UserResponse!
-    loginUser( user: UserLogin): LoginResponse!
+export const sessionQueries = `
+    validateToken(headers: Headers!): sessionData!
+`;
 
+export const sessionsMutations = `
+    createSession(session: SessionInput!): sessionData!
 `;
