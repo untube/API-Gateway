@@ -1,3 +1,3 @@
-export const url = process.env.AUTHENTICATION_URL || 'authentication-ms';
-export const port = process.env.AUTHENTICATION_PORT;
-export const entryPoint = process.env.AUTHENTICATION_ENTRY || 'auth';
+export const url = process.env.USERS_URL || 'authentication-ms';
+export const port = process.env.USERS_PORT || '3000';
+export const entryPoint = process.env.USERS_ENTRY || 'auth';
