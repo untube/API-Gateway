@@ -40,6 +40,21 @@ const resolvers = {
                     }
                 )
             })
+        },
+        createUser: (_, { user }) => {
+            return new Promise((resolve, reject) => {
+                generalRequest(`${URL}`, 'POST', user, true).then(
+                    (response) => {
+                        console.log("Server response => ", response);
+                        let user = response.body.data
+                        user['token'] = response.headers['access-token']
+                        user['uid'] = response.headers['uid']
+                        user['type'] = response.headers['token-type']
+                        user['client'] = response.headers['client']
+                        resolve(user);
+                    }
+                )
+            })
         }
     }
 };
