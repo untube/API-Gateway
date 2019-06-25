@@ -7,11 +7,11 @@ const resolvers = {
     Query: {
         validateToken: (_, { headers }) => {
             return new Promise((resolve, reject) => {
-                generalRequest(`${URL}/validate_token`, 'GET', {}, true, {
+                generalRequest(`${URL}/validate_token`, 'GET', {
                     'client': headers.client,
                     'uid': headers.uid,
                     'access-token': headers.token
-                }).then((response) => {
+                }, true).then((response) => {
                     let user = response.body.data
                     user['token'] = response.headers['access-token']
                     user['type'] = response.headers['token-type']
