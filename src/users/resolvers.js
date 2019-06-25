@@ -8,9 +8,9 @@ const resolvers = {
         validateToken: (_, { headers }) => {
             return new Promise((resolve, reject) => {
                 generalRequest(`${URL}/validate_token`, 'GET', {}, true, {
-                    client: headers.client,
-                    uid: headers.uid,
-                    access_token: headers.token
+                    'client': headers.client,
+                    'uid': headers.uid,
+                    'access-token': headers.token
                 }).then((response) => {
                     let user = response.body.data
                     user['token'] = response.headers['access-token']
