@@ -5,7 +5,7 @@ type userPreferences {
     counter: Int!
 }
 type response {
-    ids: [String]
+    id: String
 }
 input userPreferencesInput {
     id_user: Int!
@@ -15,13 +15,13 @@ input userPreferencesInput {
 
 export const videosStatisticsTypeDef = `
 type videosStatistics {
-    id_video: Int!
+    id_video: String!
     id_category: Int!
     calification: Int!
     num_views: Int!
 }
 input videosStatisticsInput {
-    id_video: Int!
+    id_video: String!
     id_category: Int!
     calification: Int
 }`;
