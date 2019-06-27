@@ -1,108 +1,127 @@
-version: '2'
+version: '2.1'
 services:
-  untube-api:
-    image: baangaritar/1e-videos-api-gateway
-    environment:
-      PORT: '5000'
-      SHOW_URLS: 'true'
-      USERS_ENTRY: 'auth'
-      USERS_PORT: '3000'
-      USERS_URL: '35.196.3.185'
-      MANAGER_ENTRY: 'uploadVideos'
-      MANAGER_PORT: '3001'
-      MANAGER_URL: '35.196.3.185'
-      REPRODUCTION_ENTRY: 'videos'
-      REPRODUCTION_PORT: '3002'
-      REPRODUCTION_URL: '35.196.3.185'
-      RECOMMENDATIONS_ENTRY: 'recommendations'
-      RECOMMENDATIONS_PORT: '3003'
-      RECOMMENDATIONS_URL: '35.196.3.185'
-      COMMENTARIES_ENTRY: 'feedback/resources/commentaries'
-      COMMENTARIES_PORT: '3004'
-      COMMENTARIES_URL: '35.196.3.185'
-    ports:
-    - 5000:5000
-    labels:
-      io.rancher.container.pull_image: always
-  users-ms:
-    image: baangaritar/1e-videos-user-ms
-    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails s -p 4000 -b '0.0.0.0'"
-    ports:
-      - 3000:4000
-    depends_on:
-      - 'users-db'
-    labels:
-      io.rancher.container.pull_image: always
-  video-manager-ms:
-    image: baangaritar/1e-videos-manager-ms
-    ports:
-    - 3001:3001
-    depends_on:
-      - 'mongodb'
-    labels:
-      io.rancher.container.pull_image: always
-  video-reproduction-ms:
-    image: baangaritar/1e-videos-reproduction-ms
-    ports:
-    - 3002:3002
-    depends_on:
-      - 'mongodb'
-    labels:
-      io.rancher.container.pull_image: always
-  recommendations-ms:
-    image: baangaritar/1e-videos-recommendations-ms
-    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:3003"
-    ports:
-      - "3003:3003"
-    depends_on:
-      - recommendations-db
-    labels:
-      io.rancher.container.pull_image: always
-  feedback-ms:
-    image: baangaritar/1e-videos-feedback-ms
-    ports:
-    - 3004:3004
-    depends_on:
-      - 'feedback-db'
-    labels:
-      io.rancher.container.pull_image: always
-  mongodb:
-    image: mongo:latest
-    ports:
-    - 27017:27017
-  feedback-db:
-    image: mysql:5.7
-    ports:
-    - 3308:3308
-    environment:
-      MYSQL_DATABASE: feedback-db
-      MYSQL_PASSWORD: '123'
-      MYSQL_ROOT_PASSWORD: '123'
-      MYSQL_USER: sa
-      MYSQL_HOST: feedback-db
-  users-db:
-    image: mysql:5.7
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_USER: arquisoft
-      MYSQL_PASSWORD: 123
-      MYSQL_DATABASE: auth
-      MYSQL_HOST: users-db
-  recommendations-db:
-    image: postgres
-  web-client:
-    image: baangaritar/1e-videos-web-client 
-    ports: 
-    - 4200:4200
-    volumes:
-      - '/app/node_modules'
-    labels:
-      io.rancher.container.pull_image: always
-  soap-service:
-    image: daaraquem/soap-service
-    command: bash -c "sleep 40 && rm -f tmp/pids/server.pid  && bundle exec rails s -p 3008 -b '0.0.0.0'"
-    ports:
-      - "3008:3008"
-
+    untube-proxy:
+      image: baangaritar/1e-videos-proxy
+      depends_on:
+        - untube-api
+      ports:
+        - "80:80"
+    untube-api:
+        image: baangaritar/1e-videos-api-gateway
+        environment:
+            PORT: '5000'
+            SHOW_URLS: 'true'
+        links:
+        - authentication-ms
+        - manager-ms
+        - reproduction-ms
+        - recommendations-ms
+        - feedback-ms
+    authentication-ms:
+        image: baangaritar/1e-videos-user-ms
+        command: bash -c "sleep 40 && rm -f tmp/pids/server.pid && bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails s -p 3000 -b '0.0.0.0'"
+        depends_on:
+        - authentication-db
+        links:
+        - untube-ldap
+    authentication-db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: 123
+            MYSQL_USER: untube
+            MYSQL_PASSWORD: 123
+            MYSQL_DATABASE: auth
+            MYSQL_HOST: authentication-db
+    untube-ldap:
+        image: osixia/openldap:1.1.8
+        environment:
+            COMPOSE_HTTP_TIMEOUT: 200
+            LDAP_LOG_LEVEL: "256"
+            LDAP_ORGANISATION: "Software Architecture Group E"
+            LDAP_DOMAIN: "untube.unal.edu.co"
+            LDAP_BASE_DN: ""
+            LDAP_ADMIN_PASSWORD: "admin"
+            LDAP_CONFIG_PASSWORD: "config"
+            LDAP_READONLY_USER: "false"
+            #LDAP_READONLY_USER_USERNAME: "readonly"
+            #LDAP_READONLY_USER_PASSWORD: "readonly"
+            LDAP_BACKEND: "hdb"
+            LDAP_TLS: "true"
+            LDAP_TLS_CRT_FILENAME: "ldap.crt"
+            LDAP_TLS_KEY_FILENAME: "ldap.key"
+            LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
+            LDAP_TLS_ENFORCE: "false"
+            LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
+            LDAP_TLS_PROTOCOL_MIN: "3.1"
+            LDAP_TLS_VERIFY_CLIENT: "demand"
+            LDAP_REPLICATION: "false"
+            #LDAP_REPLICATION_CONFIG_SYNCPROV: "binddn="cn=admin,cn=config" bindmethod=simple credentials=$LDAP_CONFIG_PASSWORD searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical"
+            #LDAP_REPLICATION_DB_SYNCPROV: "binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials=$LDAP_ADMIN_PASSWORD searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical"
+            #LDAP_REPLICATION_HOSTS: "#PYTHON2BASH:['ldap://ldap.example.org','ldap://ldap2.example.org']"
+            LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+            LDAP_SSL_HELPER_PREFIX: "ldap"
+        tty: true
+        stdin_open: true
+        volumes:
+        - /var/lib/ldap
+        - /etc/ldap/slapd.d
+        - /container/service/slapd/assets/certs/
+        hostname: "untube.org"
+    phpldapadmin:
+        image: osixia/phpldapadmin:latest
+        container_name: phpldapadmin
+        environment:
+            PHPLDAPADMIN_LDAP_HOSTS: "untube-ldap"
+            PHPLDAPADMIN_HTTPS: "false"
+        ports:
+        - "8085:80"
+        links:
+        - untube-ldap
+    manager-ms:
+        image: baangaritar/1e-videos-manager-ms
+        ports:
+        - 3001:3001
+        depends_on:
+        - 'mongodb'
+    reproduction-ms:
+        image: baangaritar/1e-videos-reproduction-ms
+        ports:
+        - 3002:3002
+        depends_on:
+        - 'mongodb'
+    recommendations-ms:
+        image: baangaritar/1e-videos-recommendations-ms
+        command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:3003"
+        depends_on:
+        - recommendations-db
+    feedback-ms:
+        image: baangaritar/1e-videos-feedback-ms
+        depends_on:
+        - 'feedback-db'
+    mongodb:
+        image: mongo:latest
+    feedback-db:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: feedback-db
+            MYSQL_PASSWORD: '123'
+            MYSQL_ROOT_PASSWORD: '123'
+            MYSQL_USER: sa
+            MYSQL_HOST: feedback-db
+    recommendations-db:
+        image: postgres
+    web-client:
+        image: baangaritar/1e-videos-web-client
+        ports:
+        - 4200:4200
+        volumes:
+        - '/app/node_modules'
+        links:
+        - untube-api
+        - manager-ms
+        - reproduction-ms
+    soap-service:
+        image: daaraquem/soap-service
+        command: bash -c "sleep 40 && rm -f tmp/pids/server.pid  && bundle exec rails s -p 3008 -b '0.0.0.0'"
+        ports:
+        - 3008:3008
