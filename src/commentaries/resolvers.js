@@ -8,8 +8,8 @@ const resolvers = {
 
         commentaryById: (_, { id }) =>
             generalRequest(`${URL}/${id}`, 'GET'),
-        commentariesByVideo: (_, { id_video }) =>
-            generalRequest(`${URL}/video/${id_video}`, 'GET'),
+        commentariesByVideo: (_, { idVideo }) =>
+            generalRequest(`${URL}/${idVideo}`, 'GET'),
     },
     Mutation: {
         createCommentary: (_, { commentary }) =>

@@ -1,24 +1,25 @@
 export const commentariesTypeDef = `
 type Commentary {
     id: Int!
-    id_user: Int!
+    idUser: Int!
     subject: String!
     description: String!
-    id_video: String!
+    idVideo: String!
     likes: Int!
-    created_at: String!
-    updated_at: String!
+    createdAt: String!
+    updatedAt: String!
 }
+
 input CommentaryInput {
     subject: String!
     description: String!
-    id_user: Int!
-    id_video: String!
+    idUser: Int!
+    idVideo: String!
 }`;
 
 export const commentariesQueries = `
     commentaryById(id: Int!): Commentary!
-    commentariesByVideo(id_video: String!): [Commentary]!
+    commentariesByVideo(idVideo: String!): [Commentary]!
 `;
 
 export const commentariesMutations = `
