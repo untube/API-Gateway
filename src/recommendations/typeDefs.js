@@ -1,7 +1,7 @@
 export const userPreferencesTypeDef = `
 type userPreferences {
     id_user: Int!
-    id_category: Int!
+    id_category: String!
     counter: Int!
 }
 type response {
@@ -21,20 +21,20 @@ type RecommendedVideo {
 }
 input userPreferencesInput {
     id_user: Int!
-    id_category: Int!
+    id_category: String!
 }`;
 
 
 export const videosStatisticsTypeDef = `
 type videosStatistics {
     id_video: String!
-    id_category: Int!
+    id_category: String!
     calification: Int!
     num_views: Int!
 }
 input videosStatisticsInput {
     id_video: String!
-    id_category: Int!
+    id_category: String!
     calification: Int
 }`;
 
