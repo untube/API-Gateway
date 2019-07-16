@@ -23,7 +23,7 @@ const resolvers = {
                 })
             })
         },
-        basicUserInfo: (_, { idUser }) =>
+        userById: (_, { idUser }) =>
             generalRequest(`http://${url}:${port}/users/${idUser}`, 'GET'),
     },
 
