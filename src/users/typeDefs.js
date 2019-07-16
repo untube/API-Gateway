@@ -38,8 +38,8 @@ type sessionData {
 
 type basicUserInfo {
     name: String!
-    nickname: string!
-    image: string!
+    nickname: String!
+    image: String!
 }
 `;
 
