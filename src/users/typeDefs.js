@@ -45,7 +45,7 @@ type basicUserInfo {
 
 export const sessionQueries = `
     validateToken(headers: Headers!): sessionData!
-    basicUserInfo(idUser: Int!): basicUserInfo!
+    userById(idUser: Int!): basicUserInfo!
 `;
 
 export const sessionsMutations = `
