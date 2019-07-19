@@ -45,6 +45,10 @@ const resolvers = {
 		feedVideoDB: (_, { videosStatistics }) =>
 			generalRequest(`${URL}/feedVideo`, 'POST', videosStatistics),
 
+		purgeVideoDB: (_, { id }) =>
+			generalRequest(`${URL}/purgeVideo`, 'POST', id),
+
+
 	}
 };
 

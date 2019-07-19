@@ -46,4 +46,5 @@ export const recommendationsQueries = `
 export const recommendationsMutations = `
     feedUserDB(userPreferences: userPreferencesInput!): String
     feedVideoDB(videosStatistics: videosStatisticsInput!): String
+    purgeVideoDB(id: String!): String
 `;
