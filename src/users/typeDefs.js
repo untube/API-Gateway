@@ -36,11 +36,16 @@ type sessionData {
     client: String!
 }
 
-
+type basicUserInfo {
+    name: String!
+    nickname: String!
+    image: String!
+}
 `;
 
 export const sessionQueries = `
     validateToken(headers: Headers!): sessionData!
+    userById(idUser: Int!): basicUserInfo!
 `;
 
 export const sessionsMutations = `

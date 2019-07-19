@@ -22,7 +22,9 @@ const resolvers = {
                     resolve(user)
                 })
             })
-        }
+        },
+        userById: (_, { idUser }) =>
+            generalRequest(`http://${url}:${port}/users/${idUser}`, 'GET'),
     },
 
     Mutation: {
